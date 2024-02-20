@@ -1,15 +1,10 @@
 import React from "react";
 import {
-  Box,
-  Button,
-  Container,
-  Grid,
-  Paper,
-  TextField,
-  Typography,
-} from "@mui/material";
+  Box,Container,Grid, Paper,Typography,} from "@mui/material";
 import image from "../assets/image.jpg";
-import { Link } from "react-router-dom";
+
+import GlobalTextField from "../components/UI/GlobalTextField";
+import GlobalButton from "../components/UI/GlobalButton";
 
 const SignUp = () => {
   return (
@@ -34,34 +29,11 @@ const SignUp = () => {
                 <Typography variant="h6">To the User Web APP</Typography>
               </Box>
               <form>
-                <TextField
-                  name="name"
-                  label="Name"
-                  sx={{ width: "100%", marginBottom: 2 }}
-                />
-                <TextField
-                  name="email"
-                  label="Email"
-                  sx={{ width: "100%", marginBottom: 2 }}
-                />
-                <TextField
-                  name="password"
-                  label="Password"
-                  sx={{ width: "100%", marginBottom: 2 }}
-                />
-                <TextField
-                  name="PhoneNo"
-                  label="Phone Number"
-                  sx={{ width: "100%", marginBottom: 2 }}
-                />
-                <Button
-                  component={Link}
-                  to="/home"
-                  variant="contained"
-                  color="success"
-                >
-                  SignUp
-                </Button>
+                <GlobalTextField name="name" label="Name" placeholder="Name" />
+                <GlobalTextField name="email" label="Email" placeholder="email" type="email"/>
+                <GlobalTextField name="password" label="Password" placeholder="password" type="password"/>
+                <GlobalTextField name="PhoneNo" label="Phone Number" placeholder="phoneNumber" type="number"/>
+                <GlobalButton variant="contained" color="success" title="Sign Up"/>
               </form>
 
               <Box

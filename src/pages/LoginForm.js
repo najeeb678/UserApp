@@ -1,6 +1,7 @@
-import { Box, Button, TextField, Typography } from "@mui/material";
+import { Box,Typography } from "@mui/material";
 import React from "react";
-import { Link } from "react-router-dom";
+import GlobalTextField from "../components/UI/GlobalTextField";
+import GlobalButton from "../components/UI/GlobalButton";
 
 const LoginForm = () => {
   return (
@@ -25,29 +26,19 @@ const LoginForm = () => {
           Login Page
         </Typography>
         <form>
-          <TextField
+          <GlobalTextField
             name="email"
             label="Email"
-            sx={{ width: "100%", marginBottom: 2 }}
+            placeholder="Enter email.."
           />
-          <TextField
+          <GlobalTextField
             name="Password"
             label="Password"
-            sx={{ width: "100%", marginBottom: 2 }}
+            placeholder="Enter password.."
           />
           <Box sx={{ display: "flex", justifyContent: "center", gap: "15px" }}>
-            <Button component={Link} to="/" variant="contained" color="primary">
-              Login
-            </Button>
-
-            <Button
-              component={Link}
-              to="/signUp"
-              variant="contained"
-              color="secondary"
-            >
-              SignUp
-            </Button>
+            <GlobalButton variant="contained" color="success" title="Log In" />
+            <GlobalButton variant="contained" color="secondary" title="Sign Up"/>
           </Box>
         </form>
       </Box>
