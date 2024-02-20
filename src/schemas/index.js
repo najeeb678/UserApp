@@ -4,8 +4,11 @@ export const signupSchema = Yup.object({
   name: Yup.string().min(2).max(20).required("please Enter your Name "),
   email: Yup.string().email().required("Please Enter your Email"),
   phone: Yup.string()
-    .matches(/^[0-9]+$/, "Phone number must contain only digits")
-    .required("Please enter your Phone number"),
+    .test("is-number", "Please enter a valid phone number", (value) => {
+      // Check if the value is a valid number
+      return !isNaN(value);
+    })
+    .required("Please enter your phone number"),
   password: Yup.string()
     .min(6, "Password must be at least 6 characters long")
     .matches(

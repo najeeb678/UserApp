@@ -3,12 +3,25 @@ import { useNavigate } from "react-router-dom";
 import React from "react";
 import GlobalTextField from "../components/UI/GlobalTextField";
 import GlobalButton from "../components/UI/GlobalButton";
+import { useFormik } from "formik";
+import { signupSchema } from "../schemas";
 
 const LoginForm = () => {
   const navigate = useNavigate();
   const handleSignUp = () => {
     navigate("/signUp");
-  }
+  };
+  const initialValues = {
+    email: "",
+    password: "",
+  };
+  const { handleChange, handleBlur, touched, values, errors } = useFormik({
+    initialValues: initialValues,
+    validationSchema: signupSchema,
+    onSubmit: (values, action) => {
+      action.resetForm();
+    },
+  });
   return (
     <Box
       sx={{
@@ -34,12 +47,24 @@ const LoginForm = () => {
           <GlobalTextField
             name="email"
             label="Email"
-            placeholder="Enter email.."
+            type="email"
+            value={values.email}
+            onChangehandler={handleChange}
+            onBlurHandler={handleBlur}
+            values={values}
+            helperText={touched.email && errors.email ? errors.email : null}
           />
           <GlobalTextField
-            name="Password"
+            name="password"
             label="Password"
-            placeholder="Enter password.."
+            type="password"
+            value={values.password}
+            onChangehandler={handleChange}
+            onBlurHandler={handleBlur}
+            values={values}
+            helperText={
+              touched.password && errors.password ? errors.password : null
+            }
           />
           <Box sx={{ display: "flex", justifyContent: "center", gap: "15px" }}>
             <GlobalButton variant="contained" color="success" title="Log In" />
