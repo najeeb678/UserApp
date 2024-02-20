@@ -5,19 +5,23 @@ const GlobalTextField = ({
   color = "primary",
   name = "textfield",
   label = "TextField",
-  placeholder = "Enter text",
-  type="text"
- 
+  type = "text",
+  onChangehandler,
+  onBlurHandler,
+  value,
+  helperText,
 }) => {
   return (
     <>
       <TextField
         name={name}
+        value={value}
         type={type}
         label={label}
         color={color}
-        placeholder={placeholder}
-       
+        onChange={onChangehandler}
+        onBlur={onBlurHandler}
+        helperText={helperText}
         sx={{ width: "100%", marginBottom: 2 }}
       />
     </>

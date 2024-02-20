@@ -1,17 +1,44 @@
 import React from "react";
 
 import { Box, Container, Grid, Paper, Typography } from "@mui/material";
+import { signupSchema } from "../schemas";
 import image from "../assets/image.jpg";
 
 import GlobalTextField from "../components/UI/GlobalTextField";
 import GlobalButton from "../components/UI/GlobalButton";
 import { useNavigate } from "react-router-dom";
+import { useFormik } from "formik";
 
 const SignUp = () => {
   const navigate = useNavigate();
-  const handleSignUp = () => {
-    navigate("/home");
+
+  const initialValues = {
+    name: "abc",
+    email: "abc@gmail.com",
+    phone: "03121122333",
+    password: "abbc@12356",
   };
+  const { handleChange, handleBlur, handleSubmit, touched, values, errors } =
+    useFormik({
+      initialValues: initialValues,
+      validationSchema: signupSchema,
+      onSubmit: (values, action) => {
+        console.log("asdasdasdasdasd????", values);
+        action.resetForm();
+        navigate("/home");
+      },
+      // onSubmit: async (values, action) => {
+      //   try {
+      //     console.log("Form values:", values);
+      //     action.resetForm();
+      //     console.log("Form reset successful.");
+      //     navigate("/home");
+      //     console.log("Navigation successful.");
+      //   } catch (error) {
+      //     console.error("Error submitting form:", error);
+      //   }
+      // },
+    });
 
   return (
     <Container
@@ -35,30 +62,60 @@ const SignUp = () => {
                 <Typography variant="h6">To the User Web APP</Typography>
               </Box>
               <form>
-                <GlobalTextField name="name" label="Name" placeholder="Name" />
+                <GlobalTextField
+                  name="name"
+                  label="Name"
+                  value={values.name}
+                  onChangehandler={handleChange}
+                  onBlurHandler={handleBlur}
+                  values={values}
+                  helperText={touched.name && errors.name ? errors.name : null}
+                />
                 <GlobalTextField
                   name="email"
                   label="Email"
-                  placeholder="email"
                   type="email"
+                  value={values.email}
+                  onChangehandler={handleChange}
+                  onBlurHandler={handleBlur}
+                  values={values}
+                  helperText={
+                    touched.email && errors.email ? errors.email : null
+                  }
                 />
                 <GlobalTextField
                   name="password"
                   label="Password"
-                  placeholder="password"
                   type="password"
+                  value={values.password}
+                  onChangehandler={handleChange}
+                  onBlurHandler={handleBlur}
+                  values={values}
+                  helperText={
+                    touched.password && errors.password ? errors.password : null
+                  }
                 />
                 <GlobalTextField
-                  name="PhoneNo"
+                  name="phone"
                   label="Phone Number"
-                  placeholder="phoneNumber"
                   type="number"
+                  value={values.phone}
+                  onChangehandler={handleChange}
+                  onBlurHandler={handleBlur}
+                  values={values}
+                  helperText={
+                    touched.phone && errors.phone ? errors.phone : null
+                  }
                 />
                 <GlobalButton
                   variant="contained"
                   color="success"
                   title="Sign Up"
-                  onclickHandler={handleSignUp}
+                  type="submit"
+                  onclickHandler={(e) => {
+                    console.log("dsdf");
+                    handleSubmit();
+                  }}
                 />
               </form>
 
