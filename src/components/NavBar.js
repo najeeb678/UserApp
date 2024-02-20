@@ -18,12 +18,12 @@ const NavBar = () => {
           Login
         </Button>
       </Link>
-      <Link to="/home">
+      <Link to="/signUp">
         <Button variant="contained" color="secondary">
           SignUp
         </Button>
       </Link>
-      <Link to="/signUp">
+      <Link to="/home">
         <Button variant="contained" color="success">
           Home
         </Button>
