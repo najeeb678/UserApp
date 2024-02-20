@@ -4,7 +4,6 @@ const LoginForm = () => {
   return (
     <div>
       <h1>LoginForm</h1>
-      jdncjkanscklmqasklcmaklm
     </div>
   );
 };
