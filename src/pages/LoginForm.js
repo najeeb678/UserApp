@@ -1,9 +1,14 @@
-import { Box,Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 import React from "react";
 import GlobalTextField from "../components/UI/GlobalTextField";
 import GlobalButton from "../components/UI/GlobalButton";
 
 const LoginForm = () => {
+  const navigate = useNavigate();
+  const handleSignUp = () => {
+    navigate("/signUp");
+  }
   return (
     <Box
       sx={{
@@ -38,7 +43,12 @@ const LoginForm = () => {
           />
           <Box sx={{ display: "flex", justifyContent: "center", gap: "15px" }}>
             <GlobalButton variant="contained" color="success" title="Log In" />
-            <GlobalButton variant="contained" color="secondary" title="Sign Up"/>
+            <GlobalButton
+              variant="contained"
+              color="secondary"
+              title="Sign Up"
+              onclickHandler={handleSignUp}
+            />
           </Box>
         </form>
       </Box>

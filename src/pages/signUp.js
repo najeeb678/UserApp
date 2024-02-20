@@ -1,12 +1,18 @@
 import React from "react";
-import {
-  Box,Container,Grid, Paper,Typography,} from "@mui/material";
+
+import { Box, Container, Grid, Paper, Typography } from "@mui/material";
 import image from "../assets/image.jpg";
 
 import GlobalTextField from "../components/UI/GlobalTextField";
 import GlobalButton from "../components/UI/GlobalButton";
+import { useNavigate } from "react-router-dom";
 
 const SignUp = () => {
+  const navigate = useNavigate();
+  const handleSignUp = () => {
+    navigate("/home");
+  };
+
   return (
     <Container
       sx={{
@@ -30,10 +36,30 @@ const SignUp = () => {
               </Box>
               <form>
                 <GlobalTextField name="name" label="Name" placeholder="Name" />
-                <GlobalTextField name="email" label="Email" placeholder="email" type="email"/>
-                <GlobalTextField name="password" label="Password" placeholder="password" type="password"/>
-                <GlobalTextField name="PhoneNo" label="Phone Number" placeholder="phoneNumber" type="number"/>
-                <GlobalButton variant="contained" color="success" title="Sign Up"/>
+                <GlobalTextField
+                  name="email"
+                  label="Email"
+                  placeholder="email"
+                  type="email"
+                />
+                <GlobalTextField
+                  name="password"
+                  label="Password"
+                  placeholder="password"
+                  type="password"
+                />
+                <GlobalTextField
+                  name="PhoneNo"
+                  label="Phone Number"
+                  placeholder="phoneNumber"
+                  type="number"
+                />
+                <GlobalButton
+                  variant="contained"
+                  color="success"
+                  title="Sign Up"
+                  onclickHandler={handleSignUp}
+                />
               </form>
 
               <Box

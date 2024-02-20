@@ -1,7 +1,5 @@
 import { Box } from "@mui/system";
 import React from "react";
-import GlobalButton from "../components/UI/GlobalButton";
-import GlobalTextField from "../components/UI/GlobalTextField";
 
 const Home = () => {
   return (
@@ -14,20 +12,6 @@ const Home = () => {
       }}
     >
       <h1>home</h1>
-      <GlobalTextField
-        name="phoneNo"
-        label="small"
-        color="success"
-        placeholder="enter phone No"
-      />
-      <GlobalTextField
-        name="phoneNo"
-        label="large"
-        color="success"
-        placeholder="enter phone No"
-      />
-      
-      <GlobalButton color="secondary" size="small" title="Home" />
     </Box>
   );
 };
