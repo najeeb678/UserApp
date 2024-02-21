@@ -1,4 +1,4 @@
-import { TextField } from "@mui/material";
+import { FormHelperText, TextField } from "@mui/material";
 
 import React from "react";
 
@@ -22,7 +22,11 @@ const GlobalInput = ({
         color={color}
         onChange={onChangehandler}
         onBlur={onBlurHandler}
-        helperText={helperText}
+        helperText={
+          <FormHelperText sx={{ color: "#f84d4d" }}>
+            {helperText}
+          </FormHelperText>
+        }
         sx={{ width: "100%", marginBottom: 2 }}
       />
     </>

@@ -15,13 +15,14 @@ const LoginForm = () => {
     email: "",
     password: "",
   };
-  const { handleChange, handleBlur, touched, values, errors } = useFormik({
-    initialValues: initialValues,
-    validationSchema: signupSchema,
-    onSubmit: (values, action) => {
-      action.resetForm();
-    },
-  });
+  const { handleChange, handleBlur, handleSubmit, touched, values, errors } =
+    useFormik({
+      initialValues: initialValues,
+      validationSchema: signupSchema,
+      onSubmit: (values, action) => {
+        action.resetForm();
+      },
+    });
   return (
     <Box
       sx={{
@@ -43,7 +44,7 @@ const LoginForm = () => {
         <Typography variant="h4" fontWeight="fontWeightBold" padding={3}>
           Login Page
         </Typography>
-        <form>
+        <form onSubmit={handleSubmit}>
           <GlobalInput
             name="email"
             label="Email"
@@ -67,7 +68,12 @@ const LoginForm = () => {
             }
           />
           <Box sx={{ display: "flex", justifyContent: "center", gap: "15px" }}>
-            <GlobalButton variant="contained" color="success" title="Log In" />
+            <GlobalButton
+              variant="contained"
+              color="success"
+              title="Log In"
+              type="submit"
+            />
             <GlobalButton
               variant="contained"
               color="secondary"
