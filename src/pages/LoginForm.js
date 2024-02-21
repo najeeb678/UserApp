@@ -20,6 +20,9 @@ const LoginForm = () => {
       initialValues: initialValues,
       validationSchema: signupSchema,
       onSubmit: (values, action) => {
+        console.log(values);
+        console.log("login");
+
         action.resetForm();
       },
     });
@@ -44,7 +47,7 @@ const LoginForm = () => {
         <Typography variant="h4" fontWeight="fontWeightBold" padding={3}>
           Login Page
         </Typography>
-        <form onSubmit={handleSubmit}>
+        <form>
           <GlobalInput
             name="email"
             label="Email"
@@ -73,6 +76,9 @@ const LoginForm = () => {
               color="success"
               title="Log In"
               type="submit"
+              onclickHandler={() => {
+                handleSubmit();
+              }}
             />
             <GlobalButton
               variant="contained"
