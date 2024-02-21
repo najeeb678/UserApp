@@ -23,7 +23,7 @@ const GlobalInput = ({
         onChange={onChangehandler}
         onBlur={onBlurHandler}
         helperText={
-          <Typography variant="body2" sx={{ color: "#f84d4d" }}>
+          <Typography sx={{ fontSize: "15px", color: "#f84d4d" }}>
             {helperText}
           </Typography>
         }
