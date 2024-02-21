@@ -29,7 +29,7 @@ const SignUp = () => {
         console.log("Dispatched:Values", values);
         dispatch(postUser(values));
         action.resetForm();
-        //navigate("/home");
+        navigate("/home");
       },
       // onSubmit: async (values, action) => {
       //   try {
