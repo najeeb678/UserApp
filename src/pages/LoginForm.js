@@ -79,7 +79,8 @@ const LoginForm = () => {
               variant="contained"
               color="success"
               title="Log In"
-              onClick={(e) => {
+              type="submit"
+              onClick={() => {
                 console.log("clicked");
                 handleSubmit();
               }}
