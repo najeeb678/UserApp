@@ -15,13 +15,17 @@ const LoginForm = () => {
     email: "",
     password: "",
   };
-  const { handleChange, handleBlur, touched, values, errors } = useFormik({
-    initialValues: initialValues,
-    validationSchema: signupSchema,
-    onSubmit: (values, action) => {
-      action.resetForm();
-    },
-  });
+  const { handleChange, handleBlur, handleSubmit, touched, values, errors } =
+    useFormik({
+      initialValues: initialValues,
+      validationSchema: signupSchema,
+      onSubmit: (values, action) => {
+        console.log(values);
+        console.log("login");
+
+        action.resetForm();
+      },
+    });
   return (
     <Box
       sx={{
@@ -69,7 +73,15 @@ const LoginForm = () => {
             autoComplete="current-password"
           />
           <Box sx={{ display: "flex", justifyContent: "center", gap: "15px" }}>
-            <GlobalButton variant="contained" color="success" title="Log In" />
+            <GlobalButton
+              variant="contained"
+              color="success"
+              title="Log In"
+              type="submit"
+              onclickHandler={() => {
+                handleSubmit();
+              }}
+            />
             <GlobalButton
               variant="contained"
               color="secondary"

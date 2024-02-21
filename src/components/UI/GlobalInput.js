@@ -1,4 +1,4 @@
-import { TextField } from "@mui/material";
+import { TextField, Typography } from "@mui/material";
 
 import React from "react";
 
@@ -24,7 +24,11 @@ const GlobalInput = ({
         color={color}
         onChange={onChangehandler}
         onBlur={onBlurHandler}
-        helperText={helperText}
+        helperText={
+          <Typography sx={{ fontSize: "15px", color: "#f84d4d" }}>
+            {helperText}
+          </Typography>
+        }
         sx={{ width: "100%", marginBottom: 2 }}
       />
     </>

@@ -103,7 +103,6 @@ const SignUp = () => {
                   title="Sign Up"
                   type="submit"
                   onclickHandler={(e) => {
-                    console.log("dsdf");
                     handleSubmit();
                   }}
                 />
