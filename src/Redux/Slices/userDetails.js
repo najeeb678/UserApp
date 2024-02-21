@@ -36,6 +36,7 @@ const userDetailSlice = createSlice({
       .addCase(postUser.fulfilled, (state, action) => {
         state.loading = false;
         state.users.push(action.payload);
+        console.log("Fulfilled: ", JSON.parse(JSON.stringify(state)));
       })
       .addCase(postUser.rejected, (state, action) => {
         state.loading = false;

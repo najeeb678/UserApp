@@ -1,7 +1,14 @@
 import { Box } from "@mui/system";
 import React from "react";
+import { useSelector } from "react-redux";
 
 const Home = () => {
+  const userName = useSelector((state) =>
+    state.userDetails.users.length > 0
+      ? state.userDetails.users[0].name
+      : "amlakmcladmc"
+  );
+
   return (
     <Box
       sx={{
@@ -11,7 +18,7 @@ const Home = () => {
         transform: "translate(-50%, -50%)",
       }}
     >
-      <h1>home</h1>
+      <h2>Welcome {userName}</h2>
     </Box>
   );
 };

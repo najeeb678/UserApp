@@ -13,8 +13,8 @@ const LoginForm = () => {
 
   // states
   const initialValues = {
-    email: "linktobakar@gmail.com",
-    password: "123456@abc",
+    email: "",
+    password: "",
   };
 
   // functions
