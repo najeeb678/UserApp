@@ -48,7 +48,7 @@ const SignUp = () => {
                 </Typography>
                 <Typography variant="h6">To the User Web APP</Typography>
               </Box>
-              <form onSubmit={handleSubmit}>
+              <form>
                 <GlobalInput
                   name="name"
                   label="Name"
@@ -101,9 +101,7 @@ const SignUp = () => {
                   variant="contained"
                   color="success"
                   title="Sign Up"
-                  onClick={() => {
-                    handleSubmit();
-                  }}
+
                 />
               </form>
 
