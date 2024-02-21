@@ -101,7 +101,8 @@ const SignUp = () => {
                   variant="contained"
                   color="success"
                   title="Sign Up"
-
+                  type="submit"
+                  onClick={handleSubmit()}
                 />
               </form>
 
