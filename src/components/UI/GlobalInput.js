@@ -11,10 +11,12 @@ const GlobalInput = ({
   onBlurHandler,
   value,
   helperText,
+  autocomplete = "off",
 }) => {
   return (
     <>
       <TextField
+        autocomplete={autocomplete}
         name={name}
         value={value}
         type={type}

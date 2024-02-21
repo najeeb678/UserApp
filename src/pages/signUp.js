@@ -57,6 +57,7 @@ const SignUp = () => {
                   onBlurHandler={handleBlur}
                   values={values}
                   helperText={touched.name && errors.name ? errors.name : null}
+                  autoComplete="name"
                 />
                 <GlobalInput
                   name="email"
@@ -69,6 +70,7 @@ const SignUp = () => {
                   helperText={
                     touched.email && errors.email ? errors.email : null
                   }
+                  autoComplete="email"
                 />
                 <GlobalInput
                   name="password"
@@ -81,6 +83,7 @@ const SignUp = () => {
                   helperText={
                     touched.password && errors.password ? errors.password : null
                   }
+                  autoComplete="current-password"
                 />
                 <GlobalInput
                   name="phone"
@@ -92,6 +95,7 @@ const SignUp = () => {
                   helperText={
                     touched.phone && errors.phone ? errors.phone : null
                   }
+                  autoComplete="phone"
                 />
                 <GlobalButton
                   variant="contained"

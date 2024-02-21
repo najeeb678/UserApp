@@ -53,6 +53,7 @@ const LoginForm = () => {
             onBlurHandler={handleBlur}
             values={values}
             helperText={touched.email && errors.email ? errors.email : null}
+            autoComplete="email"
           />
           <GlobalInput
             name="password"
@@ -65,6 +66,7 @@ const LoginForm = () => {
             helperText={
               touched.password && errors.password ? errors.password : null
             }
+            autoComplete="current-password"
           />
           <Box sx={{ display: "flex", justifyContent: "center", gap: "15px" }}>
             <GlobalButton variant="contained" color="success" title="Log In" />
