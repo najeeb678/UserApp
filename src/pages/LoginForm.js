@@ -1,21 +1,29 @@
-import { Box, Typography } from "@mui/material";
-import GlobalInput from "../components/UI/GlobalInput";
-import { useNavigate } from "react-router-dom";
 import React from "react";
-import GlobalButton from "../components/UI/GlobalButton";
+import { useNavigate } from "react-router-dom";
+import { Box, Typography } from "@mui/material";
 import { useFormik } from "formik";
+
+import GlobalInput from "../components/UI/GlobalInput";
+import GlobalButton from "../components/UI/GlobalButton";
 import { signupSchema } from "../schemas";
 
 const LoginForm = () => {
+  // hooks
   const navigate = useNavigate();
+
+  // states
+  const initialValues = {
+    email: "linktobakar@gmail.com",
+    password: "123456@abc",
+  };
+
+  // functions
   const handleSignUp = () => {
     navigate("/signUp");
   };
 
-  const initialValues = {
-    email: "",
-    password: "",
-  };
+ 
+
   const { handleChange, handleBlur, handleSubmit, touched, values, errors } =
     useFormik({
       initialValues: initialValues,
@@ -23,10 +31,10 @@ const LoginForm = () => {
       onSubmit: (values, action) => {
         console.log("login");
         console.log(values);
-
         action.resetForm();
       },
     });
+
   return (
     <Box
       sx={{
@@ -79,11 +87,10 @@ const LoginForm = () => {
               variant="contained"
               color="success"
               title="Log In"
-              onClick={() => {
-                console.log("clicked");
-                handleSubmit();
-              }}
+              // type="submit"
+              onClick={handleSubmit}
             />
+
             <GlobalButton
               variant="contained"
               color="secondary"
