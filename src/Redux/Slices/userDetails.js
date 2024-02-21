@@ -17,6 +17,7 @@ export const postUser = createAsyncThunk(
         "https://jsonplaceholder.typicode.com/posts",
         userData
       );
+      
       return response.data;
     } catch (error) {
       throw error;
@@ -42,6 +43,7 @@ const userDetailSlice = createSlice({
         state.loading = false;
         state.error = action.error.message;
       });
+  
   },
 });
 

@@ -20,6 +20,7 @@ const SignUp = () => {
     phone: "",
     password: "",
   };
+
   const { handleChange, handleBlur, handleSubmit, touched, values, errors } =
     useFormik({
       initialValues: initialValues,
