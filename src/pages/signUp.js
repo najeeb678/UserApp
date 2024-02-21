@@ -6,9 +6,13 @@ import GlobalButton from "../components/UI/GlobalButton";
 import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import GlobalInput from "../components/UI/GlobalInput";
+// import axios from "axios";
+import { useDispatch } from "react-redux";
+import { postUser } from "../Redux/Slices/userDetails";
 
 const SignUp = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const initialValues = {
     name: "",
@@ -21,10 +25,27 @@ const SignUp = () => {
       initialValues: initialValues,
       validationSchema: signupSchema,
       onSubmit: (values, action) => {
-        console.log("signUp", values);
+        //console.log("signUp", values);
+        console.log("Dispatched:Values", values);
+        dispatch(postUser(values));
         action.resetForm();
-        navigate("/home");
+        //navigate("/home");
       },
+      // onSubmit: async (values, action) => {
+      //   try {
+      //     // console.log("signUp", values);
+      //     const response = await axios.post(
+      //       "https://jsonplaceholder.typicode.com/posts",
+      //       values
+      //     );
+      //     console.log("Response:", response.data); // Log the response data
+      //     action.resetForm();
+      //     navigate("/home");
+      //   } catch (error) {
+      //     console.error("Error:", error); // Log any errors that occur during the request
+      //     // Handle error state or display error message to the user
+      //   }
+      // },
     });
 
   return (
@@ -102,7 +123,9 @@ const SignUp = () => {
                   color="success"
                   title="Sign Up"
                   type="submit"
-                  onClick={()=>{handleSubmit()}}
+                  onClick={() => {
+                    handleSubmit();
+                  }}
                 />
               </form>
 
