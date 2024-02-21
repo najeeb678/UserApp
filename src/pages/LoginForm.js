@@ -5,7 +5,7 @@ import { useFormik } from "formik";
 
 import GlobalInput from "../components/UI/GlobalInput";
 import GlobalButton from "../components/UI/GlobalButton";
-import { signupSchema } from "../schemas";
+import { loginSchema } from "../schemas/loginSchema";
 
 const LoginForm = () => {
   // hooks
@@ -22,12 +22,10 @@ const LoginForm = () => {
     navigate("/signUp");
   };
 
- 
-
   const { handleChange, handleBlur, handleSubmit, touched, values, errors } =
     useFormik({
       initialValues: initialValues,
-      validationSchema: signupSchema,
+      validationSchema: loginSchema,
       onSubmit: (values, action) => {
         console.log("login");
         console.log(values);
