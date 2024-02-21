@@ -1,29 +1,26 @@
 import React from "react";
-import { Box, Container, Grid, Paper, Typography } from "@mui/material";
-import { signupSchema } from "../schemas";
-import image from "../assets/image.jpg";
-import GlobalButton from "../components/UI/GlobalButton";
 import { useNavigate } from "react-router-dom";
-import { useFormik } from "formik";
-import GlobalInput from "../components/UI/GlobalInput";
-// import axios from "axios";
 import { useDispatch } from "react-redux";
+
+import { Box, Container, Grid, Paper, Typography } from "@mui/material";
+import { useFormik } from "formik";
+
+import GlobalButton from "../components/UI/GlobalButton";
+import { signupSchema } from "../schemas/signupSchema";
+import image from "../assets/image.jpg";
+import GlobalInput from "../components/UI/GlobalInput";
 import { postUser } from "../Redux/Slices/userDetails";
 
 const SignUp = () => {
+  
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const initialValues = {
-    name: "",
-    email: "",
-    phone: "",
-    password: "",
-  };
+ 
 
   const { handleChange, handleBlur, handleSubmit, touched, values, errors } =
     useFormik({
-      initialValues: initialValues,
+      initialValues: { name: "", email: "", phone: "", password: "" },
       validationSchema: signupSchema,
       onSubmit: (values, action) => {
         //console.log("signUp", values);
@@ -32,21 +29,6 @@ const SignUp = () => {
         action.resetForm();
         navigate("/home");
       },
-      // onSubmit: async (values, action) => {
-      //   try {
-      //     // console.log("signUp", values);
-      //     const response = await axios.post(
-      //       "https://jsonplaceholder.typicode.com/posts",
-      //       values
-      //     );
-      //     console.log("Response:", response.data); // Log the response data
-      //     action.resetForm();
-      //     navigate("/home");
-      //   } catch (error) {
-      //     console.error("Error:", error); // Log any errors that occur during the request
-      //     // Handle error state or display error message to the user
-      //   }
-      // },
     });
 
   return (

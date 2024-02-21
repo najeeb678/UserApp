@@ -1,14 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const initialState = {
-  users: [],
-  loading: false,
-  error: null,
-  isAuthenticated: false,
-  token: null
-};
-
 export const postUser = createAsyncThunk(
   "userDetail/postUser",
   async (userData) => {
@@ -17,7 +9,7 @@ export const postUser = createAsyncThunk(
         "https://jsonplaceholder.typicode.com/posts",
         userData
       );
-      
+
       return response.data;
     } catch (error) {
       throw error;
@@ -27,7 +19,13 @@ export const postUser = createAsyncThunk(
 
 const userDetailSlice = createSlice({
   name: "userDetail",
-  initialState,
+  initialState: {
+    users: [],
+    loading: false,
+    error: null,
+    isAuthenticated: false,
+    token: null,
+  },
   reducers: {},
   extraReducers: (builder) => {
     builder
@@ -43,7 +41,6 @@ const userDetailSlice = createSlice({
         state.loading = false;
         state.error = action.error.message;
       });
-  
   },
 });
 
