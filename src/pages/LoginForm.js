@@ -1,7 +1,7 @@
 import { Box, Typography } from "@mui/material";
+import GlobalInput from "../components/UI/GlobalInput";
 import { useNavigate } from "react-router-dom";
 import React from "react";
-import GlobalTextField from "../components/UI/GlobalTextField";
 import GlobalButton from "../components/UI/GlobalButton";
 import { useFormik } from "formik";
 import { signupSchema } from "../schemas";
@@ -44,7 +44,7 @@ const LoginForm = () => {
           Login Page
         </Typography>
         <form>
-          <GlobalTextField
+          <GlobalInput
             name="email"
             label="Email"
             type="email"
@@ -54,7 +54,7 @@ const LoginForm = () => {
             values={values}
             helperText={touched.email && errors.email ? errors.email : null}
           />
-          <GlobalTextField
+          <GlobalInput
             name="password"
             label="Password"
             type="password"

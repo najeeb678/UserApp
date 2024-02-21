@@ -1,12 +1,11 @@
 import React from "react";
-
 import { Box, Container, Grid, Paper, Typography } from "@mui/material";
 import { signupSchema } from "../schemas";
 import image from "../assets/image.jpg";
-import GlobalTextField from "../components/UI/GlobalTextField";
 import GlobalButton from "../components/UI/GlobalButton";
 import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
+import GlobalInput from "../components/UI/GlobalInput";
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -50,7 +49,7 @@ const SignUp = () => {
                 <Typography variant="h6">To the User Web APP</Typography>
               </Box>
               <form>
-                <GlobalTextField
+                <GlobalInput
                   name="name"
                   label="Name"
                   value={values.name}
@@ -59,7 +58,7 @@ const SignUp = () => {
                   values={values}
                   helperText={touched.name && errors.name ? errors.name : null}
                 />
-                <GlobalTextField
+                <GlobalInput
                   name="email"
                   label="Email"
                   type="email"
@@ -71,7 +70,7 @@ const SignUp = () => {
                     touched.email && errors.email ? errors.email : null
                   }
                 />
-                <GlobalTextField
+                <GlobalInput
                   name="password"
                   label="Password"
                   type="password"
@@ -83,7 +82,7 @@ const SignUp = () => {
                     touched.password && errors.password ? errors.password : null
                   }
                 />
-                <GlobalTextField
+                <GlobalInput
                   name="phone"
                   label="Phone Number"
                   value={values.phone}

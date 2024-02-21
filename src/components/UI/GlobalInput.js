@@ -2,7 +2,7 @@ import { TextField } from "@mui/material";
 
 import React from "react";
 
-const GlobalTextField = ({
+const GlobalInput = ({
   color = "primary",
   name = "textfield",
   label = "TextField",
@@ -29,4 +29,4 @@ const GlobalTextField = ({
   );
 };
 
-export default GlobalTextField;
+export default GlobalInput;
