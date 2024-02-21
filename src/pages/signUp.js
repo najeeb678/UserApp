@@ -102,7 +102,7 @@ const SignUp = () => {
                   color="success"
                   title="Sign Up"
                   type="submit"
-                  onClick={handleSubmit()}
+                  onClick={()=>{handleSubmit()}}
                 />
               </form>
 
