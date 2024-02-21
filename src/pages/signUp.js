@@ -21,7 +21,7 @@ const SignUp = () => {
       initialValues: initialValues,
       validationSchema: signupSchema,
       onSubmit: (values, action) => {
-        console.log("asd", values);
+        console.log("signUp", values);
         action.resetForm();
         navigate("/home");
       },
@@ -48,7 +48,7 @@ const SignUp = () => {
                 </Typography>
                 <Typography variant="h6">To the User Web APP</Typography>
               </Box>
-              <form>
+              <form onSubmit={handleSubmit}>
                 <GlobalInput
                   name="name"
                   label="Name"
@@ -102,9 +102,7 @@ const SignUp = () => {
                   color="success"
                   title="Sign Up"
                   type="submit"
-                  onclickHandler={(e) => {
-                    handleSubmit();
-                  }}
+                  onClick={handleSubmit()}
                 />
               </form>
 

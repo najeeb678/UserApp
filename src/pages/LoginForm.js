@@ -11,6 +11,7 @@ const LoginForm = () => {
   const handleSignUp = () => {
     navigate("/signUp");
   };
+
   const initialValues = {
     email: "",
     password: "",
@@ -20,8 +21,8 @@ const LoginForm = () => {
       initialValues: initialValues,
       validationSchema: signupSchema,
       onSubmit: (values, action) => {
-        console.log(values);
         console.log("login");
+        console.log(values);
 
         action.resetForm();
       },
@@ -37,7 +38,7 @@ const LoginForm = () => {
     >
       <Box
         sx={{
-          width: "400px", // Adjust width as needed
+          width: "400px",
           boxShadow: "0 4px 8px rgba(0, 0, 0, 0.8)",
           padding: 2,
           borderRadius: 4,
@@ -72,13 +73,14 @@ const LoginForm = () => {
             }
             autoComplete="current-password"
           />
+
           <Box sx={{ display: "flex", justifyContent: "center", gap: "15px" }}>
             <GlobalButton
               variant="contained"
               color="success"
               title="Log In"
-              type="submit"
-              onclickHandler={() => {
+              onClick={() => {
+                console.log("clicked");
                 handleSubmit();
               }}
             />
@@ -86,7 +88,7 @@ const LoginForm = () => {
               variant="contained"
               color="secondary"
               title="Sign Up"
-              onclickHandler={handleSignUp}
+              onclick={handleSignUp}
             />
           </Box>
         </form>
@@ -96,3 +98,113 @@ const LoginForm = () => {
 };
 
 export default LoginForm;
+
+// import { Box, Button, Typography } from "@mui/material";
+// import GlobalInput from "../components/UI/GlobalInput";
+// import { useNavigate } from "react-router-dom";
+// import React from "react";
+// import GlobalButton from "../components/UI/GlobalButton";
+// import { Formik, Form } from "formik"; // Import Formik's Form component
+// import { signupSchema } from "../schemas";
+
+// const LoginForm = () => {
+//   const navigate = useNavigate();
+//   const handleSignUp = () => {
+//     navigate("/signUp");
+//   };
+
+//   const initialValues = {
+//     email: "",
+//     password: "",
+//   };
+
+//   const onSubmitForm = (values, action) => {
+//     console.log("login");
+//     console.log(values);
+//     action.resetForm();
+//   };
+
+//   return (
+//     <Box
+//       sx={{
+//         display: "flex",
+//         justifyContent: "center",
+//         alignItems: "center",
+//         height: "80vh",
+//       }}
+//     >
+//       <Box
+//         sx={{
+//           width: "400px", // Adjust width as needed
+//           boxShadow: "0 4px 8px rgba(0, 0, 0, 0.8)",
+//           padding: 2,
+//           borderRadius: 4,
+//           textAlign: "center",
+//         }}
+//       >
+//         <Typography variant="h4" fontWeight="fontWeightBold" padding={3}>
+//           Login Page
+//         </Typography>
+//         {/* Use Formik's Form component */}
+//         <Formik
+//           initialValues={initialValues}
+//           validationSchema={signupSchema}
+//           onSubmit={onSubmitForm}
+//         >
+//           {({
+//             handleChange,
+//             handleBlur,
+//             handleSubmit,
+//             touched,
+//             values,
+//             errors,
+//           }) => (
+//             <Form onSubmit={handleSubmit}>
+//               <GlobalInput
+//                 name="email"
+//                 label="Email"
+//                 type="email"
+//                 value={values.email}
+//                 onChangehandler={handleChange}
+//                 onBlurHandler={handleBlur}
+//                 helperText={touched.email && errors.email ? errors.email : null}
+//                 autoComplete="email"
+//               />
+//               <GlobalInput
+//                 name="password"
+//                 label="Password"
+//                 type="password"
+//                 value={values.password}
+//                 onChangehandler={handleChange}
+//                 onBlurHandler={handleBlur}
+//                 helperText={
+//                   touched.password && errors.password ? errors.password : null
+//                 }
+//                 autoComplete="current-password"
+//               />
+
+//               <Box
+//                 sx={{ display: "flex", justifyContent: "center", gap: "15px" }}
+//               >
+//                 <GlobalButton
+//                   variant="contained"
+//                   color="success"
+//                   title="Log In"
+//                   type="submit"
+//                 />
+//                 <GlobalButton
+//                   variant="contained"
+//                   color="secondary"
+//                   title="Sign Up"
+//                   onclickHandler={handleSignUp}
+//                 />
+//               </Box>
+//             </Form>
+//           )}
+//         </Formik>
+//       </Box>
+//     </Box>
+//   );
+// };
+
+// export default LoginForm;
