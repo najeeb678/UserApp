@@ -5,6 +5,8 @@ const initialState = {
   users: [],
   loading: false,
   error: null,
+  isAuthenticated: false,
+  token: null
 };
 
 export const postUser = createAsyncThunk(
