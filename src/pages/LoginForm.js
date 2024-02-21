@@ -80,6 +80,7 @@ const LoginForm = () => {
               color="success"
               title="Log In"
               onClick={() => {
+                console.log("clicked");
                 handleSubmit();
               }}
             />
