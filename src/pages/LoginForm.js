@@ -79,7 +79,7 @@ const LoginForm = () => {
               variant="contained"
               color="success"
               title="Log In"
-              onClick={() => {
+              onClick={(e) => {
                 console.log("clicked");
                 handleSubmit();
               }}
@@ -88,7 +88,7 @@ const LoginForm = () => {
               variant="contained"
               color="secondary"
               title="Sign Up"
-              onclick={handleSignUp}
+              onClick={handleSignUp}
             />
           </Box>
         </form>

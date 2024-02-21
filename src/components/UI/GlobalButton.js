@@ -7,16 +7,9 @@ const GlobalButton = ({
   variant = "contained",
   title = "Button",
   onClick = () => {},
-  type,
 }) => {
   return (
-    <Button
-      color={color}
-      size={size}
-      variant={variant}
-      onClick={onClick}
-      type={type}
-    >
+    <Button onClick={onClick} color={color} size={size} variant={variant}>
       {title}
     </Button>
   );
