@@ -9,7 +9,7 @@ import GlobalButton from "../components/UI/GlobalButton";
 import { signupSchema } from "../schemas/signupSchema";
 import image from "../assets/image.jpg";
 import GlobalInput from "../components/UI/GlobalInput";
-import { postUser } from "../Redux/Slices/userDetails";
+import { postUserData } from "../Redux/Slices/userDetails";
 
 const SignUp = () => {
   
@@ -25,7 +25,7 @@ const SignUp = () => {
       onSubmit: (values, action) => {
         //console.log("signUp", values);
         console.log("Dispatched:Values", values);
-        dispatch(postUser(values));
+        dispatch(postUserData(values));
         action.resetForm();
         navigate("/home");
       },

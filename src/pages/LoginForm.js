@@ -2,14 +2,18 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { Box, Typography } from "@mui/material";
 import { useFormik } from "formik";
+import { useDispatch } from "react-redux";
 
 import GlobalInput from "../components/UI/GlobalInput";
 import GlobalButton from "../components/UI/GlobalButton";
 import { loginSchema } from "../schemas/loginSchema";
 
+import { postUserData } from "../Redux/Slices/userDetails";
+
 const LoginForm = () => {
   // hooks
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   // states
   const initialValues = {
@@ -29,6 +33,7 @@ const LoginForm = () => {
       onSubmit: (values, action) => {
         console.log("login");
         console.log(values);
+        dispatch(postUserData(values));
         action.resetForm();
       },
     });
