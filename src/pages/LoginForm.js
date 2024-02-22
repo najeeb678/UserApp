@@ -8,7 +8,7 @@ import GlobalInput from "../components/UI/GlobalInput";
 import GlobalButton from "../components/UI/GlobalButton";
 import { loginSchema } from "../schemas/loginSchema";
 
-import { postUserData } from "../Redux/Slices/userDetails";
+import { postLoginData } from "../Redux/Slices/userDetails";
 
 const LoginForm = () => {
   // hooks
@@ -33,7 +33,7 @@ const LoginForm = () => {
       onSubmit: (values, action) => {
         console.log("login");
         console.log(values);
-        dispatch(postUserData(values));
+        dispatch(postLoginData(values));
         action.resetForm();
       },
     });

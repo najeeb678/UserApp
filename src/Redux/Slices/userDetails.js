@@ -6,7 +6,7 @@ export const postUserData = createAsyncThunk(
   async (userData) => {
     try {
       const response = await axios.post(
-        "https://jsonplaceholder.typicode.com/posts",
+        "https://6924-116-58-9-130.ngrok-free.app/auth/signup",
         userData
       );
 
@@ -21,8 +21,12 @@ export const postLoginData = createAsyncThunk(
   "userDetails/postLoginData",
   async (loginData) => {
     try {
-      const response = await axios.post("https://dummyjson.com/auth/login", loginData);
-      
+      const response = await axios.post(
+        "https://6924-116-58-9-130.ngrok-free.app/auth/signin",
+        loginData
+      );
+      localStorage.setItem("token", response.data.token);
+
       return response;
     } catch (error) {
       throw error;
@@ -39,7 +43,11 @@ const userDetailSlice = createSlice({
     isAuthenticated: false,
     token: null,
   },
-  reducers: {},
+  reducers: {
+    setAuthenticated: (state, action) => {
+      state.isAuthenticated = action.payload;
+    },
+  },
 
   extraReducers: (builder) => {
     builder
@@ -64,7 +72,7 @@ const userDetailSlice = createSlice({
       .addCase(postLoginData.fulfilled, (state, action) => {
         state.error = null;
         state.loading = false;
-        console.log("Fulfilled login: ", JSON.parse(JSON.stringify(state)));
+        state.isAuthenticated = true;
       })
       .addCase(postLoginData.rejected, (state, action) => {
         state.loading = false;
@@ -73,5 +81,5 @@ const userDetailSlice = createSlice({
       });
   },
 });
-
+export const { setAuthenticated } = userDetailSlice.actions;
 export default userDetailSlice.reducer;
