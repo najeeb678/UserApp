@@ -14,6 +14,7 @@ const LoginForm = () => {
   // hooks
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  //const error = useSelector((state) => state.userDetail.error);
 
   // states
   const initialValues = {
@@ -30,10 +31,11 @@ const LoginForm = () => {
     useFormik({
       initialValues: initialValues,
       validationSchema: loginSchema,
-      onSubmit: (values, action) => {
+      onSubmit: async (values, action) => {
         console.log("login");
         console.log(values);
-        dispatch(postLoginData(values));
+        await dispatch(postLoginData(values));
+
         navigate("/home");
         action.resetForm();
       },
@@ -60,6 +62,7 @@ const LoginForm = () => {
         <Typography variant="h4" fontWeight="fontWeightBold" padding={3}>
           Login Page
         </Typography>
+        {/* {error && <Typography color="error">{error}</Typography>} */}
         <form>
           <GlobalInput
             name="email"
