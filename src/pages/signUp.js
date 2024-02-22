@@ -12,11 +12,8 @@ import GlobalInput from "../components/UI/GlobalInput";
 import { postUserData } from "../Redux/Slices/userDetails";
 
 const SignUp = () => {
-  
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
- 
 
   const { handleChange, handleBlur, handleSubmit, touched, values, errors } =
     useFormik({
@@ -26,8 +23,9 @@ const SignUp = () => {
         //console.log("signUp", values);
         console.log("Dispatched:Values", values);
         dispatch(postUserData(values));
+
+        navigate("/");
         action.resetForm();
-        navigate("/home");
       },
     });
 

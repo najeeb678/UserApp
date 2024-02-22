@@ -74,7 +74,7 @@ const userDetailSlice = createSlice({
       .addCase(postLoginData.fulfilled, (state, action) => {
         state.error = null;
         state.loading = false;
-        //state.isAuthenticated = true;
+        
       })
       .addCase(postLoginData.rejected, (state, action) => {
         state.loading = false;

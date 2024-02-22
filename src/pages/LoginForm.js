@@ -2,7 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { Box, Typography } from "@mui/material";
 import { useFormik } from "formik";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import GlobalInput from "../components/UI/GlobalInput";
 import GlobalButton from "../components/UI/GlobalButton";
@@ -14,7 +14,8 @@ const LoginForm = () => {
   // hooks
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  //const error = useSelector((state) => state.userDetail.error);
+  const logInError = useSelector((state) => state.userDetails.error);
+  // console.log(error)
 
   // states
   const initialValues = {
@@ -62,7 +63,7 @@ const LoginForm = () => {
         <Typography variant="h4" fontWeight="fontWeightBold" padding={3}>
           Login Page
         </Typography>
-        {/* {error && <Typography color="error">{error}</Typography>} */}
+        {logInError && <Typography color="error">{logInError}</Typography>}
         <form>
           <GlobalInput
             name="email"
