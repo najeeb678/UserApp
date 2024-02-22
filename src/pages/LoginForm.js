@@ -34,6 +34,7 @@ const LoginForm = () => {
         console.log("login");
         console.log(values);
         dispatch(postLoginData(values));
+        navigate("/home");
         action.resetForm();
       },
     });

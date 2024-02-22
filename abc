@@ -1,0 +1,261 @@
+import React from "react";
+import Home from "./pages/home";
+import LoginForm from "./pages/LoginForm";
+import SignUp from "./pages/signUp";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import NavBar from "./pages/NavBar";
+
+
+function App() {
+  const token = localStorage.getItem("token");
+  return (
+    <BrowserRouter>
+      <NavBar/>
+      <Routes>
+        <Route path="/" element={<LoginForm />} />
+        <Route path="/home" element={token?<Home/>:<LoginForm />} />
+        <Route path="/signUp" element={<SignUp />} />
+      </Routes>
+    </BrowserRouter>
+  );
+}
+
+export default App;
+import { Box } from "@mui/system";
+import React from "react";
+
+import { useSelector } from "react-redux";
+import GlobalButton from "../components/UI/GlobalButton";
+import { useNavigate } from "react-router-dom";
+
+const Home = () => {
+  const navigate = useNavigate();
+  const userName = useSelector((state) =>
+    state.userDetails.users.length > 0 ? state.userDetails.users[0].name : ""
+  );
+
+  const logoutFunction = () => {
+    localStorage.removeItem("token");
+    navigate("/");
+  };
+
+  return (
+    <Box
+      sx={{
+        position: "absolute",
+        top: "50%",
+        left: "50%",
+        transform: "translate(-50%, -50%)",
+      }}
+    >
+      <h2>Welcome {userName}</h2>
+      <Box sx={{ margin: "50px" }}>
+        <GlobalButton title="Log Out" onClick={logoutFunction} />
+      </Box>
+    </Box>
+  );
+};
+
+export default Home;
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import { Box, Typography } from "@mui/material";
+import { useFormik } from "formik";
+import { useDispatch } from "react-redux";
+
+import GlobalInput from "../components/UI/GlobalInput";
+import GlobalButton from "../components/UI/GlobalButton";
+import { loginSchema } from "../schemas/loginSchema";
+
+import { postLoginData } from "../Redux/Slices/userDetails";
+
+const LoginForm = () => {
+  // hooks
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  // states
+  const initialValues = {
+    email: "",
+    password: "",
+  };
+
+  // functions
+  const handleSignUp = () => {
+    navigate("/signUp");
+  };
+
+  const { handleChange, handleBlur, handleSubmit, touched, values, errors } =
+    useFormik({
+      initialValues: initialValues,
+      validationSchema: loginSchema,
+      onSubmit: (values, action) => {
+        console.log("login");
+        console.log(values);
+        dispatch(postLoginData(values));
+        navigate("/home");
+        // action.resetForm();
+      },
+    });
+
+  return (
+    <Box
+      sx={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        height: "80vh",
+      }}
+    >
+      <Box
+        sx={{
+          width: "400px",
+          boxShadow: "0 4px 8px rgba(0, 0, 0, 0.8)",
+          padding: 2,
+          borderRadius: 4,
+          textAlign: "center",
+        }}
+      >
+        <Typography variant="h4" fontWeight="fontWeightBold" padding={3}>
+          Login Page
+        </Typography>
+        <form>
+          <GlobalInput
+            name="email"
+            label="Email"
+            type="email"
+            value={values.email}
+            onChangehandler={handleChange}
+            onBlurHandler={handleBlur}
+            values={values}
+            helperText={touched.email && errors.email ? errors.email : null}
+            autoComplete="email"
+          />
+          <GlobalInput
+            name="password"
+            label="Password"
+            type="password"
+            value={values.password}
+            onChangehandler={handleChange}
+            onBlurHandler={handleBlur}
+            values={values}
+            helperText={
+              touched.password && errors.password ? errors.password : null
+            }
+            autoComplete="current-password"
+          />
+
+          <Box sx={{ display: "flex", justifyContent: "center", gap: "15px" }}>
+            <GlobalButton
+              variant="contained"
+              color="success"
+              title="Log In"
+              // type="submit"
+              onClick={handleSubmit}
+            />
+
+            <GlobalButton
+              variant="contained"
+              color="secondary"
+              title="Sign Up"
+              onClick={handleSignUp}
+            />
+          </Box>
+        </form>
+      </Box>
+    </Box>
+  );
+};
+
+export default LoginForm;
+
+
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import axios from "axios";
+
+export const postUserData = createAsyncThunk(
+  "userDetail/postUserData",
+  async (userData) => {
+    try {
+      const response = await axios.post(
+        "https://6924-116-58-9-130.ngrok-free.app/auth/signup",
+        userData
+      );
+
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  }
+);
+
+export const postLoginData = createAsyncThunk(
+  "userDetails/postLoginData",
+  async (loginData, { rejectWithValue }) => {
+    try {
+      const response = await axios.post(
+        "https://6924-116-58-9-130.ngrok-free.app/auth/signin",
+        loginData
+      );
+      localStorage.setItem("token", response.data.token);
+
+      return response;
+    } catch (error) {
+      if (error.response && error.response.status === 401) {
+        // Unauthorized - password doesn't match
+        return rejectWithValue("Password doesn't match");
+      }
+      throw error;
+    }
+  }
+);
+
+const userDetailSlice = createSlice({
+  name: "userDetail",
+  initialState: {
+    users: [],
+    loading: false,
+    error: null,
+    //isAuthenticated: false,
+    token: null,
+  },
+  reducers: {},
+
+  extraReducers: (builder) => {
+    builder
+      .addCase(postUserData.pending, (state) => {
+        state.error = null;
+        state.loading = true;
+      })
+      .addCase(postUserData.fulfilled, (state, action) => {
+        state.loading = false;
+        state.error = null;
+        state.users.push(action.payload);
+      })
+      .addCase(postUserData.rejected, (state, action) => {
+        state.error = true;
+        state.loading = false;
+        state.error = action.error.message;
+      })
+      .addCase(postLoginData.pending, (state) => {
+        state.error = null;
+        state.loading = true;
+      })
+      .addCase(postLoginData.fulfilled, (state, action) => {
+        state.error = null;
+        state.loading = false;
+        //state.isAuthenticated = true;
+      })
+      .addCase(postLoginData.rejected, (state, action) => {
+        state.loading = false;
+        state.error = true;
+        if (action.payload === "Password doesn't match") {
+          state.error = "Password doesn't match";
+        } else {
+          state.error = action.error.message;
+        }
+      });
+  },
+});
+export const { setAuthenticated } = userDetailSlice.actions;
+export default userDetailSlice.reducer;

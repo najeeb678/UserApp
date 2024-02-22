@@ -4,16 +4,18 @@ import LoginForm from "./pages/LoginForm";
 import SignUp from "./pages/signUp";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import NavBar from "./pages/NavBar";
-import { useSelector } from "react-redux";
+import PrivateRoutes from "./route/privateRoute";
 
 function App() {
-  const {isAuthenticated}=useSelector((state)=>state.userDetails)
+  //const token = localStorage.getItem("token");
   return (
     <BrowserRouter>
-      <NavBar/>
+      <NavBar />
       <Routes>
         <Route path="/" element={<LoginForm />} />
-        <Route path="/home" element={isAuthenticated?<Home/>:<LoginForm />} />
+        <Route element={<PrivateRoutes />}>
+          <Route path="/home" element={<Home />} />
+        </Route>
         <Route path="/signUp" element={<SignUp />} />
       </Routes>
     </BrowserRouter>

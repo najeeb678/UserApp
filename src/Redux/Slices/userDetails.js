@@ -1,3 +1,5 @@
+
+
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
@@ -19,7 +21,7 @@ export const postUserData = createAsyncThunk(
 
 export const postLoginData = createAsyncThunk(
   "userDetails/postLoginData",
-  async (loginData) => {
+  async (loginData, { rejectWithValue }) => {
     try {
       const response = await axios.post(
         "https://6924-116-58-9-130.ngrok-free.app/auth/signin",
@@ -29,6 +31,10 @@ export const postLoginData = createAsyncThunk(
 
       return response;
     } catch (error) {
+      if (error.response && error.response.status === 401) {
+        // Unauthorized - password doesn't match
+        return rejectWithValue("Password doesn't match");
+      }
       throw error;
     }
   }
@@ -40,14 +46,10 @@ const userDetailSlice = createSlice({
     users: [],
     loading: false,
     error: null,
-    isAuthenticated: false,
+    //isAuthenticated: false,
     token: null,
   },
-  reducers: {
-    setAuthenticated: (state, action) => {
-      state.isAuthenticated = action.payload;
-    },
-  },
+  reducers: {},
 
   extraReducers: (builder) => {
     builder
@@ -72,12 +74,16 @@ const userDetailSlice = createSlice({
       .addCase(postLoginData.fulfilled, (state, action) => {
         state.error = null;
         state.loading = false;
-        state.isAuthenticated = true;
+        //state.isAuthenticated = true;
       })
       .addCase(postLoginData.rejected, (state, action) => {
         state.loading = false;
         state.error = true;
-        state.error = action.error.message;
+        if (action.payload === "Password doesn't match") {
+          state.error = "Password doesn't match";
+        } else {
+          state.error = action.error.message;
+        }
       });
   },
 });
