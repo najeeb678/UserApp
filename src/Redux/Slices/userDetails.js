@@ -1,19 +1,20 @@
-
-
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 export const postUserData = createAsyncThunk(
   "userDetail/postUserData",
-  async (userData) => {
+  async (userData, { rejectWithValue }) => {
     try {
       const response = await axios.post(
-        "https://6924-116-58-9-130.ngrok-free.app/auth/signup",
+        "https://4309-116-58-9-130.ngrok-free.app/auth/signup",
         userData
       );
 
       return response.data;
     } catch (error) {
+      if (error.response.data.message && error.response.status === 400) {
+        throw rejectWithValue("User Already Exist : please login");
+      }
       throw error;
     }
   }
@@ -24,7 +25,7 @@ export const postLoginData = createAsyncThunk(
   async (loginData, { rejectWithValue }) => {
     try {
       const response = await axios.post(
-        "https://6924-116-58-9-130.ngrok-free.app/auth/signin",
+        "https://4309-116-58-9-130.ngrok-free.app/auth/signin",
         loginData
       );
       localStorage.setItem("token", response.data.token);
@@ -65,7 +66,8 @@ const userDetailSlice = createSlice({
       .addCase(postUserData.rejected, (state, action) => {
         state.error = true;
         state.loading = false;
-        state.error = action.error.message;
+        // state.error = action.error.message;
+        state.errorMessage = action.error.message;
       })
       .addCase(postLoginData.pending, (state) => {
         state.error = null;
@@ -74,7 +76,6 @@ const userDetailSlice = createSlice({
       .addCase(postLoginData.fulfilled, (state, action) => {
         state.error = null;
         state.loading = false;
-        
       })
       .addCase(postLoginData.rejected, (state, action) => {
         state.loading = false;

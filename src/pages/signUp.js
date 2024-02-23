@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { Box, Container, Grid, Paper, Typography } from "@mui/material";
 import { useFormik } from "formik";
@@ -14,20 +14,26 @@ import { postUserData } from "../Redux/Slices/userDetails";
 const SignUp = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const error = useSelector((state) => state.userDetails.error);
 
   const { handleChange, handleBlur, handleSubmit, touched, values, errors } =
     useFormik({
       initialValues: { name: "", email: "", phone: "", password: "" },
       validationSchema: signupSchema,
-      onSubmit: (values, action) => {
-        //console.log("signUp", values);
-        console.log("Dispatched:Values", values);
-        dispatch(postUserData(values));
-
-        navigate("/");
-        action.resetForm();
+      onSubmit: async (values, action) => {
+        try {
+          await dispatch(postUserData(values));
+          if (!error) {
+            setTimeout(() => {
+              navigate("/");
+            }, 2000)
+          }
+        } catch (error) {
+          console.error("Error signing up:", error);
+        }
       },
     });
+
 
   return (
     <Container
@@ -44,12 +50,19 @@ const SignUp = () => {
         <Grid container spacing={2}>
           <Grid item xs={12} sm={6} md={6} lg={6}>
             <Box sx={{ padding: 4 }}>
+              {error && (
+                  <Typography variant="body1" sx={{ color: "error.main" }}>
+                    {error}
+                  </Typography>
+                )}
+              {/* {error && console.log("Error:", error)} */}
               <Box sx={{ marginBottom: 1 }}>
                 <Typography variant="h5" fontWeight="bold">
                   Welcome!
                 </Typography>
                 <Typography variant="h6">To the User Web APP</Typography>
               </Box>
+
               <form>
                 <GlobalInput
                   name="name"

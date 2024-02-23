@@ -33,12 +33,16 @@ const LoginForm = () => {
       initialValues: initialValues,
       validationSchema: loginSchema,
       onSubmit: async (values, action) => {
-        console.log("login");
-        console.log(values);
-        await dispatch(postLoginData(values));
+        //console.log("login");
+        //console.log(values);
+        try {
+          await dispatch(postLoginData(values));
+          navigate("/home");
+        } catch (err) {
+          throw err;
+        }
 
-        navigate("/home");
-        action.resetForm();
+        //action.resetForm();
       },
     });
 
