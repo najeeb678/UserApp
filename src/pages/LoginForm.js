@@ -14,7 +14,7 @@ const LoginForm = () => {
   // hooks
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const logInError = useSelector((state) => state.userDetails.error);
+  const logInError = useSelector((state) => state.userDetails.loginError);
   // console.log(error)
 
   // states

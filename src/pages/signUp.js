@@ -14,7 +14,7 @@ import { postUserData } from "../Redux/Slices/userDetails";
 const SignUp = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const error = useSelector((state) => state.userDetails.error);
+  const error = useSelector((state) => state.userDetails.signupError);
 
   const { handleChange, handleBlur, handleSubmit, touched, values, errors } =
     useFormik({
@@ -26,14 +26,13 @@ const SignUp = () => {
           if (!error) {
             setTimeout(() => {
               navigate("/");
-            }, 2000)
+            }, 2000);
           }
-        } catch (error) {
-          console.error("Error signing up:", error);
+        } catch (err) {
+          console.error("Error signing up:", err);
         }
       },
     });
-
 
   return (
     <Container
@@ -51,10 +50,10 @@ const SignUp = () => {
           <Grid item xs={12} sm={6} md={6} lg={6}>
             <Box sx={{ padding: 4 }}>
               {error && (
-                  <Typography variant="body1" sx={{ color: "error.main" }}>
-                    {error}
-                  </Typography>
-                )}
+                <Typography variant="body1" sx={{ color: "error.main" }}>
+                  {error}
+                </Typography>
+              )}
               {/* {error && console.log("Error:", error)} */}
               <Box sx={{ marginBottom: 1 }}>
                 <Typography variant="h5" fontWeight="bold">

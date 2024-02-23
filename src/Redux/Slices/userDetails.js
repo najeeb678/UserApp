@@ -46,7 +46,8 @@ const userDetailSlice = createSlice({
   initialState: {
     users: [],
     loading: false,
-    error: null,
+    signupError: null,
+    loginError: null,
     //isAuthenticated: false,
     token: null,
   },
@@ -55,38 +56,42 @@ const userDetailSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(postUserData.pending, (state) => {
-        state.error = null;
+        state.signupError = null;
         state.loading = true;
       })
       .addCase(postUserData.fulfilled, (state, action) => {
         state.loading = false;
-        state.error = null;
+        state.signupError = null;
         state.users.push(action.payload);
       })
       .addCase(postUserData.rejected, (state, action) => {
-        state.error = true;
+        state.signupError = true;
         state.loading = false;
-        // state.error = action.error.message;
-        state.errorMessage = action.error.message;
+        state.signupError = action.error.message;
+        if (action.payload === "User Already Exist : please login") {
+          state.signupError = "User Already Exist : please login";
+        } else {
+          state.signupError = action.error.message;
+        }
       })
       .addCase(postLoginData.pending, (state) => {
-        state.error = null;
+        state.loginError = null;
         state.loading = true;
       })
       .addCase(postLoginData.fulfilled, (state, action) => {
-        state.error = null;
+        state.loginError = null;
         state.loading = false;
       })
       .addCase(postLoginData.rejected, (state, action) => {
         state.loading = false;
-        state.error = true;
+        state.loginError = true;
         if (action.payload === "Password doesn't match") {
-          state.error = "Password doesn't match";
+          state.loginError = "Password doesn't match";
         } else {
-          state.error = action.error.message;
+          state.loginError = action.error.message;
         }
       });
   },
 });
-export const { setAuthenticated } = userDetailSlice.actions;
+
 export default userDetailSlice.reducer;
