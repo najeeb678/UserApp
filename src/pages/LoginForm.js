@@ -10,7 +10,7 @@ import { loginSchema } from "../schemas/loginSchema";
 
 import { postLoginData } from "../Redux/Slices/userDetails";
 
-const LoginForm = () => {
+const LoginForm = (props) => {
   // hooks
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -37,6 +37,7 @@ const LoginForm = () => {
         //console.log(values);
         try {
           await dispatch(postLoginData(values));
+         
           navigate("/home");
         } catch (err) {
           throw err;
@@ -99,8 +100,9 @@ const LoginForm = () => {
               variant="contained"
               color="success"
               title="Log In"
-              // type="submit"
-              onClick={handleSubmit}
+              type="submit"
+              onClick={()=>{handleSubmit()}}
+             
             />
 
             <GlobalButton
