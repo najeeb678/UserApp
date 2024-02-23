@@ -2,7 +2,12 @@
 
 // const PrivateRoutes2 = () => {
 //   let token = localStorage.getItem("token");
-//   return token ? <Outlet /> : <Navigate to="/"/>;
+
+//   if (!token) {
+//     return <Outlet />;
+//   } else {
+//     return <Navigate to="/home" />;
+//   }
 // };
 
 // export default PrivateRoutes2;

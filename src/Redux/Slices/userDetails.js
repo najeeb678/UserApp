@@ -6,7 +6,7 @@ export const postUserData = createAsyncThunk(
   async (userData, { rejectWithValue }) => {
     try {
       const response = await axios.post(
-        "https://539f-116-58-9-130.ngrok-free.app/auth/signup",
+        "https://7d4e-116-58-9-130.ngrok-free.app/auth/signup",
         userData
       );
 
@@ -25,7 +25,7 @@ export const postLoginData = createAsyncThunk(
   async (loginData, { rejectWithValue }) => {
     try {
       const response = await axios.post(
-        "https://539f-116-58-9-130.ngrok-free.app/auth/signin",
+        "https://7d4e-116-58-9-130.ngrok-free.app/auth/signin",
         loginData
       );
       localStorage.setItem("token", response.data.token);
